@@ -9,20 +9,20 @@
 <body>
 
     <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <p>Accede con tu cuenta registrada en Azure AD B2C</p>
+        <h2>Log In</h2>
+        <p>Acces with your Azure AD B2C Account</p>
 
         <form id="loginForm">
-            <label for="email">Correo Electrónico</label>
+            <label for="email">Email</label>
             <input type="email" id="email" placeholder="usuario@example.com" required>
 
-            <label for="password">Contraseña</label>
+            <label for="password">Password</label>
             <input type="password" id="password" placeholder="********" required>
 
-            <button type="submit">Iniciar Sesión</button>
+            <button type="submit">Log In</button>
         </form>
 
-        <button class="azure-login" onclick="loginWithAzure()">Iniciar Sesión con Azure</button>
+        <button class="azure-login" onclick="loginWithAzure()">Log In with Azure</button>
 
         <p id="error-message" class="error-message"></p>
     </div>

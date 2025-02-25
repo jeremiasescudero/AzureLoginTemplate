@@ -1,37 +1,60 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Azure AD B2C</title>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Metadatos requeridos por Azure AD B2C -->
+    <!-- Required for Azure AD B2C -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="x-ua-compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <!-- Script de Azure AD B2C para inyección del formulario -->
-    <script src="https://b2cui.b2clogin.com/static/js/unifiedspa.js"></script>
+    <!-- Azure AD B2C Script -->
+    <script src="https://b2cui.b2clogin.com/static/js/unifiedspa.js" defer></script>
 </head>
 <body>
+
+    <!-- Header -->
+    <header class="portal-header">
+        <h1>Authentication Portal</h1>
+    </header>
 
     <div class="login-container">
         <h2>Log In</h2>
         <p>Access with your Azure AD B2C Account</p>
 
-        <!-- Azure AD B2C inyectará el formulario dentro de este div -->
-        <div id="api"></div>
+        <!-- Sign Up Link (Moved Above the Form) -->
+        <p class="signup-link">
+            Don't have an account? <a href="#" onclick="redirectToSignUp()">Sign up now</a>
+        </p>
 
-        <button class="azure-login" onclick="loginWithAzure()">Log In with Azure</button>
+        <!-- Azure AD B2C injects the authentication form here -->
+        <div id="api"></div>
 
         <p id="error-message" class="error-message"></p>
     </div>
 
-    <!-- MSAL para autenticación con Azure AD B2C -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/msal/2.20.0/msal-browser.min.js"></script>
-    <script src="authConfig.js"></script>
-    <script src="script.js"></script>
+    <!-- Footer -->
+    <footer class="portal-footer">
+        <p>&copy; 2025 [Your Company Name]. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Redirect to sign-up page
+        function redirectToSignUp() {
+            window.location.href = "https://b2clogin.com/YOUR_TENANT.onmicrosoft.com/YOUR_USER_FLOW";
+        }
+
+        // Force form injection check
+        window.onload = function () {
+            if (!document.getElementById("api").innerHTML.trim()) {
+                console.error("Azure AD B2C form not injected.");
+                document.getElementById("error-message").textContent = "Error loading login form. Try again.";
+            }
+        };
+    </script>
 
 </body>
 </html>

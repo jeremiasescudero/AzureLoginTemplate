@@ -1,21 +1,78 @@
-<ClaimType Id="givenName">
-    <DisplayName>First Name</DisplayName>
-    <DataType>string</DataType>
-    <DefaultPartnerClaimTypes>
-        <Protocol Name="OAuth2" PartnerClaimType="firstName" />
-    </DefaultPartnerClaimTypes>
-    <UserHelpText>Enter your first name</UserHelpText>
-    <DefaultValue />
-    <ClaimTypePredicate ValidationPredicate="Required" />
-</ClaimType>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+    PolicySchemaVersion="0.3.0.0"
+    TenantId="YOUR_TENANT_ID.onmicrosoft.com"
+    PolicyId="B2C_1A_TrustFrameworkExtensions"
+    PublicPolicyUri="http://YOUR_TENANT_ID.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions">
 
-<ClaimType Id="surname">
-    <DisplayName>Last Name</DisplayName>
-    <DataType>string</DataType>
-    <DefaultPartnerClaimTypes>
-        <Protocol Name="OAuth2" PartnerClaimType="lastName" />
-    </DefaultPartnerClaimTypes>
-    <UserHelpText>Enter your last name</UserHelpText>
-    <DefaultValue />
-    <ClaimTypePredicate ValidationPredicate="Required" />
-</ClaimType>
+    <!-- Base Policy Reference -->
+    <BasePolicy>
+        <PolicyId>B2C_1A_TrustFrameworkBase</PolicyId>
+        <TenantId>YOUR_TENANT_ID.onmicrosoft.com</TenantId>
+    </BasePolicy>
+
+    <!-- Claims Definitions -->
+    <ClaimsSchema>
+        <ClaimType Id="givenName">
+            <DisplayName>First Name</DisplayName>
+            <DataType>string</DataType>
+            <DefaultPartnerClaimTypes>
+                <Protocol Name="OAuth2" PartnerClaimType="firstName" />
+            </DefaultPartnerClaimTypes>
+            <UserHelpText>Enter your first name</UserHelpText>
+            <DefaultValue />
+            <ClaimTypePredicate ValidationPredicate="Required" />
+        </ClaimType>
+        
+        <ClaimType Id="surname">
+            <DisplayName>Last Name</DisplayName>
+            <DataType>string</DataType>
+            <DefaultPartnerClaimTypes>
+                <Protocol Name="OAuth2" PartnerClaimType="lastName" />
+            </DefaultPartnerClaimTypes>
+            <UserHelpText>Enter your last name</UserHelpText>
+            <DefaultValue />
+            <ClaimTypePredicate ValidationPredicate="Required" />
+        </ClaimType>
+        
+        <ClaimType Id="displayName">
+            <DisplayName>Display Name</DisplayName>
+            <DataType>string</DataType>
+            <DefaultPartnerClaimTypes>
+                <Protocol Name="OAuth2" PartnerClaimType="DisplayName" />
+            </DefaultPartnerClaimTypes>
+            <DefaultValue>SNC - {givenName} {surname}</DefaultValue>
+        </ClaimType>
+    </ClaimsSchema>
+    
+    <!-- User Journey for SignUpOrSignIn -->
+    <UserJourneys>
+        <UserJourney Id="SignUpOrSignIn">
+            <OrchestrationSteps>
+                <OrchestrationStep Order="1" Type="ClaimsExchange">
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="SelfAsserted-SignUpOrSignIn" TechnicalProfileReferenceId="SelfAsserted-SignUpOrSignIn" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+                
+                <OrchestrationStep Order="2" Type="SendClaims">
+                    <Preconditions>
+                        <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+                            <Value>isActiveMFASession</Value>
+                            <Value>True</Value>
+                            <Action>SkipThisOrchestrationStep</Action>
+                        </Precondition>
+                    </Preconditions>
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="AAD-UserReadUsingObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+                
+                <OrchestrationStep Order="3" Type="SendClaimsAndToken" />
+            </OrchestrationSteps>
+        </UserJourney>
+    </UserJourneys>
+</TrustFrameworkPolicy>

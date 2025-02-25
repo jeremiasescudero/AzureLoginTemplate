@@ -5,28 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Azure AD B2C</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Metadatos requeridos por Azure AD B2C -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="x-ua-compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Script de Azure AD B2C para inyección del formulario -->
+    <script src="https://b2cui.b2clogin.com/static/js/unifiedspa.js"></script>
 </head>
 <body>
 
     <div class="login-container">
         <h2>Log In</h2>
-        <p>Acces with your Azure AD B2C Account</p>
+        <p>Access with your Azure AD B2C Account</p>
 
-        <form id="loginForm">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="usuario@example.com" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="********" required>
-
-            <button type="submit">Log In</button>
-        </form>
+        <!-- Azure AD B2C inyectará el formulario dentro de este div -->
+        <div id="api"></div>
 
         <button class="azure-login" onclick="loginWithAzure()">Log In with Azure</button>
 
         <p id="error-message" class="error-message"></p>
     </div>
 
+    <!-- MSAL para autenticación con Azure AD B2C -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/msal/2.20.0/msal-browser.min.js"></script>
     <script src="authConfig.js"></script>
     <script src="script.js"></script>

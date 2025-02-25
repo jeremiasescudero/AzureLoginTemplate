@@ -1,0 +1,21 @@
+<ClaimType Id="givenName">
+    <DisplayName>First Name</DisplayName>
+    <DataType>string</DataType>
+    <DefaultPartnerClaimTypes>
+        <Protocol Name="OAuth2" PartnerClaimType="firstName" />
+    </DefaultPartnerClaimTypes>
+    <UserHelpText>Enter your first name</UserHelpText>
+    <DefaultValue />
+    <ClaimTypePredicate ValidationPredicate="Required" />
+</ClaimType>
+
+<ClaimType Id="surname">
+    <DisplayName>Last Name</DisplayName>
+    <DataType>string</DataType>
+    <DefaultPartnerClaimTypes>
+        <Protocol Name="OAuth2" PartnerClaimType="lastName" />
+    </DefaultPartnerClaimTypes>
+    <UserHelpText>Enter your last name</UserHelpText>
+    <DefaultValue />
+    <ClaimTypePredicate ValidationPredicate="Required" />
+</ClaimType>

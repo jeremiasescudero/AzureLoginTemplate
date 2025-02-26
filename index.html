@@ -1,61 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Azure AD B2C</title>
+    <title>Sign In - Gambit³</title>
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Required for Azure AD B2C -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="x-ua-compatible" content="IE=edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <!-- Azure AD B2C Script -->
     <script src="https://b2cui.b2clogin.com/static/js/unifiedspa.js" defer></script>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- HEADER -->
     <header class="portal-header">
-        <h1>Authentication Portal</h1>
+        <h1>Gambit³ Authentication Portal</h1>
     </header>
 
     <div class="login-container">
-        <h2>Log In</h2>
-        <p>Access with your Azure AD B2C Account</p>
+        <div class="login-box">
+            <img src="img\G3- Logo for White Backgrounds - Version 2.png" alt="Gambit³ Logo" class="logo">
+            <h2>Sign In</h2>
 
-        <!-- Sign Up Link (Moved Above the Form) -->
-        <p class="signup-link">
-            Don't have an account? <a href="#" onclick="redirectToSignUp()">Sign up now</a>
-        </p>
+            <!-- Move Sign Up link above the form -->
+            <p class="signup-text">Don't have an account? <a href="#" onclick="signUp()">Sign up now</a></p>
 
-        <!-- Azure AD B2C injects the authentication form here -->
-        <div id="api"></div>
+            <form id="loginForm">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="you@example.com" required>
 
-        <p id="error-message" class="error-message"></p>
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+
+            <p class="forgot-password"><a href="#">Forgot your password?</a></p>
+
+            <hr>
+            <p class="social-text">Sign in with your social account</p>
+            <button class="google-btn" onclick="loginWithGoogle()">
+                <img src="img\avfci721i.webp" alt="Google"> Google
+            </button>
+        </div>
     </div>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="portal-footer">
-        <p>&copy; 2025 TEEE3. All rights reserved.</p>
+        <p>&copy; 2025 Gambit³. All rights reserved.</p>
     </footer>
 
+    <script src="authConfig.js"></script>
+    <script src="script.js"></script>
     <script>
-        // Redirect to sign-up page
-        function redirectToSignUp() {
-            window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_SIGNUP_LOGIN";
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            loginWithAzure();
+        });
+
+        function signUp() {
+            window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SIGNUP_LOGIN&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95&redirect_uri=https://gambit3.teee3.com/signin-oidc&response_type=id_token&scope=openid";
         }
 
-        // Force form injection check
-        window.onload = function () {
-            if (!document.getElementById("api").innerHTML.trim()) {
-                console.error("Azure AD B2C form not injected.");
-                document.getElementById("error-message").textContent = "Error loading login form. Try again.";
-            }
-        };
+        function loginWithGoogle() {
+            window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SIGNUP_LOGIN&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95&redirect_uri=https://gambit3.teee3.com/signin-oidc&response_type=id_token&scope=openid&acr_values=google";
+        }
     </script>
-
 </body>
 </html>

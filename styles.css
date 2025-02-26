@@ -1,4 +1,4 @@
-/* Reset básico para mejor consistencia */
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -6,119 +6,180 @@
     font-family: "Arial", sans-serif;
 }
 
-/* Estilos generales de la página */
+/* Fondo */
 body {
-    background: #f0f2f5;
+    background: #e3f2fd;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    text-align: center;
 }
 
-/* Header (barra superior) */
+/* Header */
 .portal-header {
-    background: #005ea5;
-    color: white;
     width: 100%;
-    padding: 20px;
+    background: #1565c0;
+    color: white;
     text-align: center;
-    font-size: 1.8rem;
+    padding: 15px;
+    font-size: 20px;
     font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
 }
 
-/* Contenedor del login */
+/* Contenedor de login */
 .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin-top: 80px;
+}
+
+/* Caja del formulario */
+.login-box {
     background: white;
-    padding: 30px;
+    padding: 40px;
     border-radius: 12px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 400px;
-    margin-top: 20px;
 }
 
-/* Títulos y subtítulos */
+/* Logo */
+.logo {
+    width: 260px;
+    margin-bottom: 15px;
+}
+
+/* Estilos de los títulos */
 h2 {
-    color: #333;
-    font-size: 1.8rem;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #1565c0;
+}
+
+/* Enlace de registro */
+.signup-text {
     margin-bottom: 10px;
-}
-
-p {
     font-size: 14px;
-    color: #666;
 }
 
-/* Estilos del enlace "Sign Up" */
-.signup-link {
-    font-size: 14px;
-    margin: 10px 0;
-}
-
-.signup-link a {
-    color: #005ea5;
+.signup-text a {
+    color: #1565c0;
     font-weight: bold;
     text-decoration: none;
 }
 
-.signup-link a:hover {
+.signup-text a:hover {
     text-decoration: underline;
 }
 
-/* Botones */
-button {
-    background: #ff5722;
-    color: white;
+/* Inputs */
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #1565c0;
+}
+
+input {
+    width: 100%;
     padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Botón de inicio de sesión */
+.login-btn {
+    background: #1565c0;
+    color: white;
+    padding: 14px;
     border: none;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 6px;
+    font-size: 18px;
     cursor: pointer;
-    font-size: 16px;
+    transition: 0.3s;
     margin-top: 15px;
-    transition: 0.3s ease;
 }
 
-button:hover {
-    background: #e64a19;
+.login-btn:hover {
+    background: #0d47a1;
 }
 
-/* Botón de Login con Azure */
-.azure-login {
-    background: #0078d4;
+/* Enlace de contraseña olvidada */
+.forgot-password {
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.forgot-password a {
+    color: #1565c0;
+    text-decoration: none;
     font-weight: bold;
 }
 
-.azure-login:hover {
-    background: #005ea5;
+.forgot-password a:hover {
+    text-decoration: underline;
 }
 
-/* Mensaje de error */
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
+/* Línea separadora */
+hr {
+    margin: 20px 0;
+    border: none;
+    height: 1px;
+    background: #ddd;
+}
+
+/* Botón de Google */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid #bbb;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Icono de Google */
+.google-btn img {
+    width: 60px;
+    margin-right: 8px;
+}
+
+/* Hover en botón de Google */
+.google-btn:hover {
+    background: #f1f1f1;
 }
 
 /* Footer */
 .portal-footer {
-    margin-top: 20px;
+    width: 100%;
     text-align: center;
+    padding: 15px;
     font-size: 12px;
     color: #555;
-    width: 100%;
-    padding: 15px;
     background: white;
     border-top: 1px solid #ddd;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 0;
 }
 
-/* Responsive: Ajuste en pantallas pequeñas */
-@media screen and (max-width: 450px) {
-    .login-container {
+/* Ajustes para pantallas pequeñas */
+@media screen and (max-width: 400px) {
+    .login-box {
         width: 90%;
     }
 }

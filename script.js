@@ -17,9 +17,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     alert("Validación correcta. Aquí iría la lógica de autenticación local.");
 });
 
-/**
- * Iniciar sesión con Azure AD B2C
- */
+
 async function loginWithAzure() {
     try {
         const loginResponse = await msalInstance.loginPopup({
@@ -29,11 +27,14 @@ async function loginWithAzure() {
         console.log("Usuario autenticado:", loginResponse.account);
         alert(`Bienvenido, ${loginResponse.account.username}`);
 
-        // Aquí puedes redirigir al usuario a otra página
-        // window.location.href = "/dashboard";
+        
     } catch (error) {
         console.error("Error en el inicio de sesión con Azure:", error);
         document.getElementById("error-message").textContent = "Error al iniciar sesión con Azure.";
         document.getElementById("error-message").style.display = "block";
     }
 }
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita que la página se recargue
+    loginWithAzure(); // Llama a la función de login
+});

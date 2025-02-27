@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <!-- HEADER -->
+    
     <header class="portal-header">
         <h1>Gambit³ Authentication Portal</h1>
     </header>
@@ -19,7 +19,7 @@
             <img src="img\G3- Logo for White Backgrounds - Version 2.png" alt="Gambit³ Logo" class="logo">
             <h2>Sign In</h2>
 
-            <!-- Move Sign Up link above the form -->
+            
             <p class="signup-text">Don't have an account? <a href="#" onclick="signUp()">Sign up now</a></p>
 
             <form id="loginForm">
@@ -33,7 +33,7 @@
             </form>
 
             <p class="forgot-password"><a href="#">Forgot your password?</a></p>
-
+            <div id="api"></div> 
             <hr>
             <p class="social-text">Sign in with your social account</p>
             <button class="google-btn" onclick="loginWithGoogle()">
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+   
     <footer class="portal-footer">
         <p>&copy; 2025 Gambit³. All rights reserved.</p>
     </footer>
@@ -59,9 +59,19 @@
             window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SIGNUP_LOGIN&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95&redirect_uri=https://gambit3.teee3.com/signin-oidc&response_type=id_token&scope=openid";
         }
 
-        function loginWithGoogle() {
-            window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SIGNUP_LOGIN&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95&redirect_uri=https://gambit3.teee3.com/signin-oidc&response_type=id_token&scope=openid&acr_values=google";
+        function signUpWithGoogle() {
+            window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?" +
+            "p=B2C_1_SIGNUP_LOGIN" +  // Nombre del flujo de usuario en Azure AD B2C
+            "&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95" +  // Reemplázalo con tu Client ID
+            "&nonce=defaultNonce" +
+            "&redirect_uri=https%3A%2F%2Fgambit3.teee3.com%2Fsignin-oidc" +  // URI de redirección codificada en URL
+            "&scope=openid%20profile%20email" +
+            "&response_type=id_token" +
+            "&prompt=login" +
+            "&acr_values=google";  // 🔹 Esto le dice a Azure AD B2C que use Google
         }
+
+
     </script>
 </body>
 </html>

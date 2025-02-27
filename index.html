@@ -17,9 +17,9 @@
     <div class="login-container">
         <div class="login-box">
             <img src="img\G3- Logo for White Backgrounds - Version 2.png" alt="Gambit³ Logo" class="logo">
-            <h2>Sign In</h2>
 
-            
+
+                
             <p class="signup-text">Don't have an account? <a href="#" onclick="signUp()">Sign up now</a></p>
 
             <form id="loginForm">
@@ -29,7 +29,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" placeholder="••••••••" required>
 
-                <button type="submit" class="login-btn">Sign In</button>
+                <button type="button" class="login-btn" onclick="loginWithAzure()">Sign In</button>
             </form>
 
             <p class="forgot-password"><a href="#">Forgot your password?</a></p>
@@ -42,6 +42,7 @@
         </div>
     </div>
 
+    <div id="api"></div>
    
     <footer class="portal-footer">
         <p>&copy; 2025 Gambit³. All rights reserved.</p>
@@ -59,7 +60,7 @@
             window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SIGNUP_LOGIN&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95&redirect_uri=https://gambit3.teee3.com/signin-oidc&response_type=id_token&scope=openid";
         }
 
-        function signUpWithGoogle() {
+        function loginWithGoogle() {
             window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?" +
             "p=B2C_1_SIGNUP_LOGIN" +  // Nombre del flujo de usuario en Azure AD B2C
             "&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95" +  // Reemplázalo con tu Client ID

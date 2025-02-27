@@ -18,23 +18,13 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 });
 
 
-async function loginWithAzure() {
-    try {
-        const loginResponse = await msalInstance.loginPopup({
-            scopes: ["openid", "profile", "email"]
-        });
-
-        console.log("Usuario autenticado:", loginResponse.account);
-        alert(`Bienvenido, ${loginResponse.account.username}`);
-
-        
-    } catch (error) {
-        console.error("Error en el inicio de sesión con Azure:", error);
-        document.getElementById("error-message").textContent = "Error al iniciar sesión con Azure.";
-        document.getElementById("error-message").style.display = "block";
-    }
+function loginWithAzure() {
+    window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?" +
+        "p=B2C_1_SignUpSignIn" +  // Replace with your actual User Flow name
+        "&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95" +  // Your Azure AD B2C Client ID
+        "&nonce=defaultNonce" +
+        "&redirect_uri=https%3A%2F%2Fgambit3.teee3.com%2Fsignin-oidc" +  // Redirect URI (must match your Azure settings)
+        "&scope=openid%20profile%20email" +
+        "&response_type=id_token" +
+        "&prompt=login";
 }
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita que la página se recargue
-    loginWithAzure(); // Llama a la función de login
-});

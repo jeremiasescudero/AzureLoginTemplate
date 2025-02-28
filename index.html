@@ -48,8 +48,8 @@
         <p>&copy; 2025 Gambit³. All rights reserved.</p>
     </footer>
 
-    <script src="authConfig.js"></script>
-    <script src="script.js"></script>
+    <script src="authConfig.js" defer></script>
+    <script src="script.js" defer></script>
     <script>
         document.getElementById("loginForm").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -57,19 +57,19 @@
         });
 
         function signUp() {
-            window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_SIGNUP_LOGIN&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95&redirect_uri=https://gambit3.teee3.com/signin-oidc&response_type=id_token&scope=openid";
+            window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_SIGNUP_LOGIN";
         }
 
         function loginWithGoogle() {
             window.location.href = "https://gambit3teee3.b2clogin.com/gambit3teee3.onmicrosoft.com/oauth2/v2.0/authorize?" +
-            "p=B2C_1_SIGNUP_LOGIN" +  // Nombre del flujo de usuario en Azure AD B2C
-            "&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95" +  // Reemplázalo con tu Client ID
+            "p=B2C_1_SIGNUP_LOGIN" +  
+            "&client_id=9a2b7851-9c08-4fb1-a88b-7d3c48f47e95" +  
             "&nonce=defaultNonce" +
-            "&redirect_uri=https%3A%2F%2Fgambit3.teee3.com%2Fsignin-oidc" +  // URI de redirección codificada en URL
+            "&redirect_uri=https://gambit3.teee3.com/signin-oidc" +  
             "&scope=openid%20profile%20email" +
             "&response_type=id_token" +
             "&prompt=login" +
-            "&acr_values=google";  // 🔹 Esto le dice a Azure AD B2C que use Google
+            "&acr_values=google";  
         }
 
 

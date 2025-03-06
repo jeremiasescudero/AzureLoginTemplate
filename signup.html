@@ -39,11 +39,11 @@
 
         /* Form Container */
         #api {
-            max-width: 400px;
+            max-width: 450px;
             margin: 80px auto;
-            padding: 20px;
+            padding: 30px;
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
@@ -51,12 +51,12 @@
         /* Headings */
         h1, h2 {
             color: #1565c0;
-            font-size: 24px;
-            margin-bottom: 15px;
+            font-size: 26px;
+            margin-bottom: 20px;
         }
 
-        /* Labels & Inputs */
-        label {
+        /* Labels */
+        label, .attrEntry label {
             display: block;
             text-align: left;
             font-weight: bold;
@@ -64,13 +64,15 @@
             margin-top: 10px;
         }
 
-        input, select {
+        /* Inputs */
+        input, select, .textBox {
             width: 100%;
             padding: 12px;
             margin: 5px 0;
             border: 1px solid #bbb;
             border-radius: 6px;
             font-size: 16px;
+            display: block;
         }
 
         /* Buttons */
@@ -100,6 +102,18 @@
 
         a:hover {
             text-decoration: underline;
+        }
+
+        /* Remove default bullet points */
+        ul, ol {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* Fix for "What is this?" links */
+        .attrEntry a {
+            font-size: 12px;
+            color: #0d47a1;
         }
 
         /* Footer */

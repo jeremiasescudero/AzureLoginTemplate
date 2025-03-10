@@ -6,7 +6,6 @@
     <title>Sign Up - Gambit³</title>
 
     <style>
-        /* Global Reset */
         * {
             margin: 0;
             padding: 0;
@@ -14,7 +13,6 @@
             font-family: "Arial", sans-serif;
         }
 
-        /* Full Page Layout */
         body {
             background: #e3f2fd;
             display: flex;
@@ -24,7 +22,6 @@
             height: 100vh;
         }
 
-        /* Header */
         .portal-header {
             width: 100%;
             background: #1565c0;
@@ -37,26 +34,23 @@
             top: 0;
         }
 
-        /* Form Container */
         #api {
-            max-width: 450px;
+            max-width: 400px;
             margin: 80px auto;
-            padding: 30px;
+            padding: 20px;
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
 
-        /* Headings */
-        h1, h2 {
+        h1 {
             color: #1565c0;
-            font-size: 26px;
-            margin-bottom: 20px;
+            font-size: 24px;
+            margin-bottom: 15px;
         }
 
-        /* Labels */
-        label, .attrEntry label {
+        label {
             display: block;
             text-align: left;
             font-weight: bold;
@@ -64,19 +58,16 @@
             margin-top: 10px;
         }
 
-        /* Inputs */
-        input, select, .textBox {
+        input {
             width: 100%;
             padding: 12px;
             margin: 5px 0;
             border: 1px solid #bbb;
             border-radius: 6px;
             font-size: 16px;
-            display: block;
         }
 
-        /* Buttons */
-        button, input[type="submit"] {
+        button {
             background: #1565c0;
             color: white;
             padding: 14px;
@@ -89,11 +80,10 @@
             margin-top: 15px;
         }
 
-        button:hover, input[type="submit"]:hover {
+        button:hover {
             background: #0d47a1;
         }
 
-        /* Links */
         a {
             color: #1565c0;
             text-decoration: none;
@@ -104,19 +94,6 @@
             text-decoration: underline;
         }
 
-        /* Remove default bullet points */
-        ul, ol {
-            list-style: none;
-            padding: 0;
-        }
-
-        /* Fix for "What is this?" links */
-        .attrEntry a {
-            font-size: 12px;
-            color: #0d47a1;
-        }
-
-        /* Footer */
         .portal-footer {
             width: 100%;
             text-align: center;
@@ -129,29 +106,74 @@
             position: absolute;
             bottom: 0;
         }
-
-        /* Mobile */
-        @media screen and (max-width: 400px) {
-            #api {
-                width: 90%;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header class="portal-header">
         <h1>Gambit³ Authentication Portal</h1>
     </header>
 
-    <!-- Azure AD B2C will inject the Sign Up form here -->
     <div id="api"></div>
 
-    <!-- Footer -->
     <footer class="portal-footer">
         <p>&copy; 2025 Gambit³. All rights reserved.</p>
     </footer>
+
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mover "Sign up now" arriba del formulario de inicio de sesión
+            let signUpLink = document.querySelector("a[href*='signup']");
+            let signInForm = document.querySelector("form");
+            if (signUpLink && signInForm) {
+                signInForm.parentNode.insertBefore(signUpLink, signInForm);
+            }
+
+            // No requerir clic para enviar el código de verificación 2FA
+            let verificationInput = document.querySelector("input[name='VerificationCode']");
+            if (verificationInput) {
+                verificationInput.addEventListener("input", function () {
+                    if (this.value.length === 6) {
+                        document.querySelector("button[title='Submit']").click();
+                    }
+                });
+            }
+
+            // No requerir código dos veces en reseteo de contraseña
+            let confirmPassword = document.querySelector("input[name='NewPasswordConfirm']");
+            if (confirmPassword) {
+                confirmPassword.style.display = "none";
+            }
+
+            // No requerir clic para continuar después de la verificación
+            let continueButton = document.querySelector("button[title='Continue']");
+            if (continueButton) {
+                continueButton.click();
+            }
+
+            // Cambiar labels de Given Name y Surname a First Name y Last Name
+            let givenName = document.querySelector("input[name='GivenName']");
+            let surname = document.querySelector("input[name='Surname']");
+            if (givenName) {
+                givenName.placeholder = "First Name";
+                document.querySelector("label[for='GivenName']").innerText = "First Name";
+            }
+            if (surname) {
+                surname.placeholder = "Last Name";
+                document.querySelector("label[for='Surname']").innerText = "Last Name";
+            }
+
+            // Mostrar Display Name con el formato "SNC - Nombre Apellido"
+            let displayName = document.querySelector("input[name='DisplayName']");
+            if (givenName && surname && displayName) {
+                function updateDisplayName() {
+                    displayName.value = `SNC - ${givenName.value} ${surname.value}`;
+                }
+                givenName.addEventListener("input", updateDisplayName);
+                surname.addEventListener("input", updateDisplayName);
+            }
+        });
+    </script>
 
 </body>
 </html>

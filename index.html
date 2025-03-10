@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - Gambit³</title>
 
-    <!-- FontAwesome para iconos -->
+    <!-- FontAwesome para iconos (si decides usarlos) -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 
     <style>
+        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
@@ -17,7 +18,7 @@
         }
 
         body {
-            background: #e3f2fd;
+            background: #e3f2fd; /* Un azul claro como fondo */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,130 +26,119 @@
             height: 100vh;
         }
 
-        .portal-header {
-            width: 100%;
-            background: #1565c0;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            position: absolute;
-            top: 0;
-        }
-
+        /* Contenedor principal del formulario */
         #api {
-            max-width: 400px;
-            margin: 80px auto;
-            padding: 25px;
+            width: 400px; /* Ancho fijo */
             background: white;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
+            padding: 30px;
+            text-align: left; /* Alineación a la izquierda */
         }
 
+        /* Título del formulario */
         h2 {
             color: #1565c0;
-            font-size: 26px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            margin-top: 0; /* Ajuste para eliminar margen superior innecesario */
         }
 
-        .social-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
+        /* Estilos para las etiquetas de los campos (asumiendo que Azure las inyecta con este estilo) */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
         }
 
-        .social-buttons button {
-            background: white;
-            border: 1px solid #bbb;
-            color: black;
+        /* Estilos para los campos de entrada (asumiendo que Azure los inyecta) */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 16px;
-            padding: 12px;
-            cursor: pointer;
-            border-radius: 8px;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #1565c0;
+            box-shadow: 0 0 5px rgba(21, 101, 192, 0.2);
+        }
+
+        /* Contenedor para "Recordarme" y "Olvidé mi contraseña" */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para el checkbox "Recordarme" */
+        .remember-me {
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-            font-weight: bold;
         }
 
-        .social-buttons button i {
-            font-size: 18px;
-            margin-right: 8px;
+        .remember-me input[type="checkbox"] {
+            margin-right: 5px;
         }
 
-        .social-buttons button:hover {
-            background: #f1f1f1;
+        /* Estilos para "Olvidé mi contraseña" */
+        .forgot-password a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 14px;
         }
 
-        .or-separator {
-            margin: 20px 0;
-            font-weight: bold;
-            color: #555;
-            text-transform: uppercase;
-            position: relative;
+        .forgot-password a:hover {
+            text-decoration: underline;
         }
 
-        .or-separator::before,
-        .or-separator::after {
-            content: "";
-            position: absolute;
-            width: 40%;
-            height: 1px;
-            background: #bbb;
-            top: 50%;
-        }
-
-        .or-separator::before {
-            left: 0;
-        }
-
-        .or-separator::after {
-            right: 0;
-        }
-
-        .portal-footer {
+        /* Botón de inicio de sesión */
+        button[type="submit"] {
+            background-color: #1565c0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
             width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0d47a1;
+        }
+
+        /* Footer */
+        .portal-footer {
             text-align: center;
-            padding: 15px;
+            padding: 20px;
             font-size: 12px;
             color: #555;
-            background: white;
-            border-top: 1px solid #ddd;
-            box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            bottom: 0;
         }
 
-        @media screen and (max-width: 400px) {
-            #api {
+        /*Media Queries*/
+        @media (max-width: 500px){
+            #api{
                 width: 90%;
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <header class="portal-header">
-        <h1>Gambit³ Authentication Portal</h1>
-    </header>
-
     <div id="api">
-        <h2>Sign In</h2>
-
-        <div class="social-buttons">
-            <button onclick="signInWithGoogle()">
-                <i class="fab fa-google"></i> Sign in with Google
-            </button>
-            <button onclick="signInWithFacebook()">
-                <i class="fab fa-facebook"></i> Sign in with Facebook
-            </button>
-        </div>
-
-        <p class="or-separator">OR</p>
+        <h2>ACCOUNT LOGIN</h2>
+        <!-- Aquí se inyectará el formulario de Azure AD B2C -->
     </div>
 
     <footer class="portal-footer">
